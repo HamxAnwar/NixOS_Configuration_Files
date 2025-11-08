@@ -1,6 +1,8 @@
-# Ignore build outputs from performing a nix-build or `nix build` command
 result
 result-*
 
-# Ignore automatically generated direnv output
 .direnv
+
+./home/r3d/git-personal.nix
+# ./home/r3d/ssh-private.nix
+# ./home/r3d/gpg-private.nix
