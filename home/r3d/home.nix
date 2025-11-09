@@ -32,6 +32,8 @@ in
     grim
     slurp
     bibata-cursors
+    onlyoffice-bin
+    joplin-desktop
   ];
  
   # Enable notifications
