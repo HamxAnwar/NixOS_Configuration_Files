@@ -7,19 +7,7 @@
     userEmail = "hamzaanwar93@outlook.com";
     signing = {
       key = "~/.ssh/id_ed25519.pub";
-      signByDefault = false;
-    };
-
-    services.ssh-agent.enable = true;
-
-    programs.ssh = {
-      enable = true;
-      matchBlocks = {
-        "github.com" = {
-          user = "git";
-          identityFile = "~/.ssh/id_ed25519";
-        };
-      };
+      signByDefault = true;
     };
 
     extraConfig = {
@@ -40,4 +28,16 @@
       };
     };
   };
+    
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+    matchBlocks = {
+      "github.com" = {
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519";
+      };
+    };
+  };
+  services.ssh-agent.enable = true;
 }

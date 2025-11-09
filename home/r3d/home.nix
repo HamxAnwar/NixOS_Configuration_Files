@@ -31,6 +31,7 @@ in
     swaybg
     grim
     slurp
+    bibata-cursors
   ];
  
   # Enable notifications
@@ -42,6 +43,7 @@ in
     settings.main = {
       font = "JetbrainsMono Nerd Font:size=11";
       dpi-aware = "no";
+      shell = "zellij";
     };
   };
 
@@ -54,8 +56,38 @@ in
   programs.waybar.enable = true;
 
   # Basic environment variables for user sesssion
-  home.sessionVariables = {
-    GTK_THEME = "Adwaita-dark";
-    QT_QPA_PLATFORMTHEME = "gtk2";
+    home = {
+    sessionVariables = {
+      GTK_THEME = "Adwaita-dark";
+      QT_QPA_PLATFORMTHEME = "gtk2";
+  };
+    pointerCursor = {
+      gtk.enable = true;
+      name = "Bibata-Modern-Classic-Right";
+      package = pkgs.bibata-cursors;
+      size = 24;
+      x11.enable = true; # For X11 apps
+    };
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.adwaita-icon-theme;
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk";
+    style = {
+      name = "adwaita-dark";
+      package = pkgs.adwaita-qt;
+    };
   };
 }
