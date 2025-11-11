@@ -11,20 +11,33 @@
     ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+    # Use latest kernel.
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
 
-  networking.hostName = "legion"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking = {
+    hostName = "legion"; # Define your hostname.
+  
+    # Pick only one of the below networking options.
+    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    networkmanager = {
+      enable = true;  # Easiest to use and most distros use this by default.
+      wifi.backend = "iwd";
+    };
 
-  networking.interfaces.eno1.useDHCP = true;
-  networking.interfaces.wlo1.useDHCP = true;
+    wireless.iwd.enable = true;
 
+    # Or disable the firewall altogether.
+    firewall.enable = false;
+  };
+
+  systemd.services.NetworkManager.wantedBy = lib.mkForce [ "multi-user.target" ];
 
   # Set your time zone.
   time.timeZone = "Asia/Karachi";
@@ -41,12 +54,6 @@
   #    useXkbConfig = true; # use xkb.options in tty.
   #  };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-
-  
-
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -62,43 +69,85 @@
   };
   
   # Hardware section
-  hardware.enableAllFirmware = true;
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
+  hardware = {
+    enableAllFirmware = true;
+    graphics = {
+      enable = true;
+      enable32Bit = true;
   };
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    nvidiaSettings = true;
-    open = false;
-  };
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = true;
+      nvidiaSettings = true;
+      open = false;
+    };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
+    bluetooth.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
+  services = {
+    # Enable the X11 windowing system.
+    xserver.enable = true;
+    blueman.enable = true;
+    xserver.videoDrivers = [ "nvidia" ];
+
+    # Enable CUPS to print documents.
+    printing.enable = true;
+
+    upower.enable = true;
+
+    logind.extraConfig = ''
+      HandleLidSwitch=suspend
+      IdleAction=suspend
+      IdleActionSec=30min
+    '';
+
+    # Enable sound.
+    # services.pulseaudio.enable = true;
+    # OR
+
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
+
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
+
+    # Enable the OpenSSH daemon.
+    openssh.enable = true;
+
+    
+    # Run the graphical Display Manager and Window Manager
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd '${pkgs.niri}/bin/niri'";
+          # command = "${pkgs.niri}/bin/niri"; # To directly go to niri without login screen
+          user = "r3d";
+        };
+      };
+    };
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.r3d = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.fish;
   };
 
-  programs.dconf.enable = true;
-  programs.firefox.enable = true;
+  programs = {
+    dconf.enable = true;
+    firefox.enable = true;
+    fish = {
+      enable = true;
+      interactiveShellInit = ''
+        alias cat="bat --paging=never"
+      '';
+    };
+  };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -119,6 +168,8 @@
     # home-manager
     # niri # It will be available systemwide so you can start it from a TTY
     bibata-cursors
+    xdg-desktop-portal
+    xdg-desktop-portal-wlr
   ];
 
   # Fonts
@@ -152,27 +203,16 @@
 
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+  
 
-  # Run the graphical Display Manager and Window Manager
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd '${pkgs.niri}/bin/niri'";
-        # command = "${pkgs.niri}/bin/niri"; # To directly go to niri without login screen
-        user = "r3d";
-      };
-    };
-  };
- 
+  
+
+
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
