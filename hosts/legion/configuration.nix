@@ -134,7 +134,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.r3d = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
 
