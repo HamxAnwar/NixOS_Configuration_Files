@@ -921,6 +921,7 @@ in
         layer = "overlay";
       };
     };
+    gnome-keyring.enable = true;
   };
 
   systemd.user.services = {

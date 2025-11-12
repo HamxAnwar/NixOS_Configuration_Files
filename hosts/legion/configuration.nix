@@ -147,6 +147,7 @@
         alias cat="bat --paging=never"
       '';
     };
+    seahorse.enable = true;
   };
 
   # List packages installed in system profile.
