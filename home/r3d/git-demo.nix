@@ -3,25 +3,12 @@
 {
   programs.git = {
     enable = true;
-    userName = "Your Name Here";
-    userEmail = "your.email@example.com";
+    userName = "Username";
+    userEmail = "Github_Email";
     signing = {
-      key = "~/.ssh/demo_ed25519.pub";
-      signByDefault = false;
+      key = "pub file location";
+      signByDefault = true;
     };
-
-    services.ssh-agent.enable = true;
-
-    programs.ssh = {
-      enable = true;
-      matchBlocks = {
-        "github.com" = {
-          user = "git";
-          identityFile = "~/.ssh/demo_ed25519";
-        };
-      };
-    };
-
 
     extraConfig = {
       init.defaultBranch = "main";
@@ -31,7 +18,7 @@
       core.editor = "Text/Code Editor";
       gpg.format = "ssh";
       commit.gpgSign = false;
-      user.signingKey = "~/.ssh/demo_ed25519.pub";
+      user.signingKey = "pub file location";
       alias = {
         co = "checkout";
         br = "branch";
@@ -41,4 +28,16 @@
       };
     };
   };
+    
+  programs.ssh = {
+    enable = true;
+    addKeysToAgent = "yes";
+    matchBlocks = {
+      "github.com" = {
+        user = "git";
+        identityFile = "private ssh file location";
+      };
+    };
+  };
+  services.ssh-agent.enable = true;
 }
