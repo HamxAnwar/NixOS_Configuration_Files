@@ -99,7 +99,7 @@
     logind.extraConfig = ''
       HandleLidSwitch=suspend
       IdleAction=suspend
-      IdleActionSec=30min
+      IdleActionSec=60min
     '';
 
     # Enable sound.
