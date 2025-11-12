@@ -4,9 +4,6 @@ result-*
 
 .direnv
 
-./home/r3d/git-personal.nix
-=======
-# ./home/r3d/git-personal.nix
 >>>>>>> b7ff9a4 (Updated configuration)
 # ./home/r3d/ssh-private.nix
 # ./home/r3d/gpg-private.nix
