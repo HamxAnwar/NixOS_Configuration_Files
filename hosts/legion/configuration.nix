@@ -31,7 +31,7 @@
       wifi.backend = "iwd";
     };
 
-    wireless.iwd.enable = lib.mkForce false;
+    # wireless.iwd.enable = lib.mkForce false;
 
     # Or disable the firewall altogether.
     firewall.enable = false;
