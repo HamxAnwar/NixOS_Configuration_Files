@@ -65,7 +65,6 @@
     package = pkgs.nixVersions.stable;
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      maxSystemGenerations = 5;  # keeps only the last 5 generations
     };
   };
   
