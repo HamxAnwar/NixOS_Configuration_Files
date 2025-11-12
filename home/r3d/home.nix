@@ -1,14 +1,10 @@
 { config, pkgs, ... }:
-
-let
-  personal = builtins.pathExists ./git-personal.nix;
-  gitConfig =
-    if personal then import ./git-personal.nix { inherit config pkgs; } else import ./git-demo.nix { inherit config pkgs; };
-in
  
 {
   # Import Git configuration
-  imports = [ gitConfig ];
+  imports = [
+    /home/r3d/Projects/nixos-config/home/r3d/git-personal.nix
+  ];
 
   # User configs
   home = {
