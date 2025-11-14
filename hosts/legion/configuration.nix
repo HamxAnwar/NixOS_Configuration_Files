@@ -28,10 +28,10 @@
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networkmanager = {
       enable = true;  # Easiest to use and most distros use this by default.
-      wifi.backend = "iwd";
+      # wifi.backend = "iwd";
     };
 
-    # wireless.iwd.enable = lib.mkForce false;
+    wireless.iwd.enable = false;
 
     # Or disable the firewall altogether.
     firewall.enable = false;
@@ -61,10 +61,23 @@
   # Allow unfree software
   nixpkgs.config.allowUnfree = true;
 
+  # Adding security
+  security = {
+    sudo.wheelNeedsPassword = false;
+    protectKernelImage = true;
+  };
+
   nix = {
     package = pkgs.nixVersions.stable;
     settings = {
+      auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
+      substituters = [ "https://cache.nixos.org/" ];
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
     };
   };
   
@@ -85,6 +98,11 @@
     bluetooth.enable = true;
   };
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 30;
+  };
+  
   services = {
     # Enable the X11 windowing system.
     xserver.enable = true;
@@ -94,14 +112,22 @@
     # Enable CUPS to print documents.
     printing.enable = true;
 
+    logind = {
+      extraConfig = ''
+        HandleLidSwitch=suspend
+        HandleLidSwitchExternalPower=ignore
+        IdleAction=ignore
+        HoldoffTimeoutSec=30s
+        InhibitDelayMaxSec=5s
+      '';
+    };
+  
+    # Use power-profiles-daemon for better power management
+    power-profiles-daemon.enable = true;
+  
+    # Keep upower for battery monitoring
     upower.enable = true;
-
-    logind.extraConfig = ''
-      HandleLidSwitch=suspend
-      IdleAction=suspend
-      IdleActionSec=60min
-    '';
-
+  
     # Enable sound.
     # services.pulseaudio.enable = true;
     # OR
@@ -128,6 +154,10 @@
           user = "r3d";
         };
       };
+    };
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
     };
   };
 
@@ -236,7 +266,13 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.05"; # Did you read the comment?
-
+  system = {
+    stateVersion = "25.05"; # Did you read the comment?
+    
+    autoUpgrade = {
+      enable = true;
+      channel = "https://nixos.org/channels/nixos-25.05";
+    };
+  };
 }
 

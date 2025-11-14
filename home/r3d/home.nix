@@ -931,10 +931,10 @@
       Service = {
         ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
         Restart = "on-failure";
-        Environment = [
-          "WAYLAND_DISPLAY=wayland-1"
-          "DISPLAY=:0"
-        ];
+        # Environment = [
+          # "WAYLAND_DISPLAY=wayland-1"
+          # "DISPLAY=:0"
+        # ];
       };
 
       Install = {
@@ -950,10 +950,10 @@
       Service = {
         ExecStart = "${pkgs.mako}/bin/mako";
         Restart = "on-failure";
-          Environment = [
-            "WAYLAND_DISPLAY=wayland-1"
-            "XDG_RUNTIME_DIR=%t"
-          ];
+          # Environment = [
+            # "WAYLAND_DISPLAY=wayland-1"
+            # "XDG_RUNTIME_DIR=%t"
+          # ];
       };
       Install = {
         WantedBy = [ "graphical-session.target" ];
@@ -968,10 +968,10 @@
       Service = {
         ExecStart = "${pkgs.oguri}/bin/oguri";
         Restart = "on-failure";
-        Environment = [
-          "XDG_RUNTIME_DIR=%t"
-          "WAYLAND_DISPLAY=wayland-1"
-        ];
+        # Environment = [
+          # "XDG_RUNTIME_DIR=%t"
+          # "WAYLAND_DISPLAY=wayland-1"
+        # ];
       };
       Install = {
         WantedBy = [ "graphical-session.target" ];
