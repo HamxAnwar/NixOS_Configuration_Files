@@ -3,7 +3,7 @@
 {
   # Import Git configuration
   imports = [
-    /home/robotics/Projects/nixos-config/home/robotics/git-personal.nix
+    /home/robotics/Projects/NixOS_Configuration_Files/home/robotics/git-personal.nix
   ];
 
   # User configs
