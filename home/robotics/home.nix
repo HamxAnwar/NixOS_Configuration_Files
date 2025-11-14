@@ -3,13 +3,13 @@
 {
   # Import Git configuration
   imports = [
-    /home/r3d/Projects/nixos-config/home/r3d/git-personal.nix
+    /home/robotics/Projects/nixos-config/home/robotics/git-personal.nix
   ];
 
   # User configs
   home = {
-    username = "r3d";
-    homeDirectory = "/home/r3d";
+    username = "robotics";
+    homeDirectory = "/home/robotics";
     stateVersion = "25.05";
   
     # User-level apps...
@@ -42,7 +42,7 @@
     
     file.".config/oguri/config".text = ''
       [output *]
-      image=/home/r3d/Downloads/WP1.png
+      image=/home/robotics/Downloads/WP1.png
       scaling-mode=stretch
     '';
 
@@ -60,7 +60,7 @@
       
       //startup {
       //  spawn mako
-      //  spawn swaybg -i /home/r3d/Downloads/WP1.png
+      //  spawn swaybg -i /home/robotics/Downloads/WP1.png
       //}
 
       input {

@@ -8,20 +8,20 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.legion = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.carl = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 
       specialArgs = { inherit inputs; };
 
       modules = [
-        ./hosts/legion/configuration.nix
+        ./hosts/carl/configuration.nix
 
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
-          home-manager.users.r3d = import ./home/r3d/home.nix;
+          home-manager.users.robotics = import ./home/robotics/home.nix;
         }
       ];
     };

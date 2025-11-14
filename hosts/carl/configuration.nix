@@ -22,7 +22,7 @@
   };
 
   networking = {
-    hostName = "legion"; # Define your hostname.
+    hostName = "robotics"; # Define your hostname.
   
     # Pick only one of the below networking options.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -151,7 +151,7 @@
         default_session = {
           command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd '${pkgs.niri}/bin/niri'";
           # command = "${pkgs.niri}/bin/niri"; # To directly go to niri without login screen
-          user = "r3d";
+          user = "robotics";
         };
       };
     };
@@ -162,7 +162,7 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.r3d = {
+  users.users.robotics = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
