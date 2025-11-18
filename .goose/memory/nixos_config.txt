@@ -1,0 +1,3 @@
+# nixos configuration flake
+NixOS configuration repository at /home/r3d/Projects/nixos-config with structure: flake.lock, flake.nix, .git, .gitignore, home directory, hosts directory, LICENSE, opencode.json, README.md
+

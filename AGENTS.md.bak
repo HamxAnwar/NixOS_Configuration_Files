@@ -1,0 +1,27 @@
+# AGENTS.md
+
+## Build/Lint/Test Commands
+- Build: `nixos-rebuild switch --flake .#legion`
+- Lint: `nix fmt`
+- Test: No specific tests defined for NixOS configurations
+- Run single test: Not applicable (NixOS configuration files)
+
+## Code Style Guidelines
+- Follow Nix syntax with proper indentation (4 spaces)
+- Use `nixpkgs.lib` for utility functions
+- Follow NixOS module structure conventions
+- Use `inputs` for external dependencies
+- Modules should be imported from appropriate paths
+- Use `flake.nix` as main entry point for configuration
+- Variables should use snake_case naming convention
+- Comments use `#` prefix
+- No type checking (Nix is dynamically typed)
+- Use `builtins` functions for built-in operations when needed
+
+## Additional Rules
+- All configuration files must be valid Nix syntax
+- Use `nixpkgs.lib` for common utilities
+- Follow NixOS and Home Manager documentation best practices
+- Configuration files should be structured following the flake pattern
+- Use `specialArgs` for passing inputs to modules
+- Prefer `pkgs` over `nixpkgs` for package access

@@ -1,0 +1,3 @@
+# project_structure nix git
+Directory listing for a Nix-based project with flake.lock, flake.nix, .git, .gitignore, .goose directory, home/, hosts/, LICENSE, opencode.json, and README.md
+

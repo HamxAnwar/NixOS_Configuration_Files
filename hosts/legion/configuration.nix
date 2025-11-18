@@ -109,6 +109,9 @@
     blueman.enable = true;
     xserver.videoDrivers = [ "nvidia" ];
 
+    # Tailscale
+    tailscale.enable = true;
+
     # Enable CUPS to print documents.
     printing.enable = true;
 
