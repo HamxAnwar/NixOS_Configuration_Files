@@ -13,7 +13,7 @@ result
 result*
 
 # Ignore secrets and personal configs
-home/r3d/git-personal.nix
+./home/robotics/git-personal.nix
 
 # Ignore backup files created by Home Manager
 *.backup
