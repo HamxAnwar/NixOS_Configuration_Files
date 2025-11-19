@@ -155,10 +155,10 @@
         };
       };
     };
-    ollama = {
-      enable = true;
-      acceleration = "cuda";
-    };
+    # ollama = {
+    #  enable = true;
+    #  acceleration = "cuda";
+    #};
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

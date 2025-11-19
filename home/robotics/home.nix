@@ -42,7 +42,7 @@
     
     file.".config/oguri/config".text = ''
       [output *]
-      image=/home/robotics/Downloads/WP1.png
+      image=/home/robotics/Downloads/WP1.jpg
       scaling-mode=stretch
     '';
 
