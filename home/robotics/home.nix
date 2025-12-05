@@ -19,7 +19,7 @@
       waybar
       fuzzel
       mako
-      foot
+      ghostty
       zellij
       wl-clipboard
       swaybg
@@ -404,7 +404,7 @@
         Mod+Shift+Slash { show-hotkey-overlay; }
 
         // Suggested binds for running programs: terminal, app launcher, screen locker.
-        Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
+        Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
         Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
         Mod+B hotkey-overlay-title="Run a Browser: firefox" { spawn "firefox"; }
         // Super+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
@@ -591,7 +591,7 @@
         Mod+Shift+R { switch-preset-window-height; }
         Mod+Ctrl+R { reset-window-height; }
         Mod+F { maximize-column; }
-        Mod+Shift+F { spawn-sh "foot -e superfile"; }
+        Mod+Shift+F { spawn-sh "ghostty -e superfile"; }
 
         // Expand the focused column to space not taken up by other fully visible columns.
         // Makes the column "fill the rest of the space".
@@ -710,15 +710,15 @@
       };
     };
 
-    # Example enable foot config
-    foot = {
-      enable = true;
-      settings.main = {
-        font = "JetbrainsMono Nerd Font:size=11";
-        dpi-aware = "no";
-        shell = "zellij";
-      };
-    };
+    # Example enable terminal config
+    # ghostty = {
+    #   enable = true;
+    #   settings.main = {
+    #     font = "JetbrainsMono Nerd Font:size=11";
+    #     dpi-aware = "no";
+    #     shell = "zellij";
+    #   };
+    # };
 
     # Github Configuration
     git = {
@@ -805,7 +805,7 @@
             format-wifi = "  {essid}";
             format-ethernet = " {ifname}";
             format-disconnected = "";
-            on-click = "foot -e nmtui";
+            on-click = "ghostty -e nmtui";
           };
 
           tray = { spacing = 10; };
@@ -884,7 +884,7 @@
       settings = {
         main = {
           font = "JetBrainsMono Nerd Font:size=12";
-          terminal = "foot";
+          terminal = "ghostty";
           prompt = "❯ ";
           icon-theme = "Papirus-Dark";
           dpi-aware = true;
