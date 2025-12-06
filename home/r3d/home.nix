@@ -26,10 +26,10 @@
       grim
       slurp
       bibata-cursors
-      onlyoffice-bin
+      onlyoffice-desktopeditors
       joplin-desktop
       xwayland-satellite
-      oguri
+      # oguri
       bat
       btop
       neofetch
@@ -39,14 +39,6 @@
       cliphist
     ];
 
-    
-    file.".config/oguri/config".text = ''
-      [output *]
-      image=/home/r3d/Downloads/WP1.png
-      scaling-mode=stretch
-    '';
-
-    
     # Niri keybindings
     file.".config/niri/config.kdl".text = ''
       // This config is in the KDL format: https://kdl.dev
@@ -310,7 +302,7 @@
       
       // This line starts waybar, a commonly used bar for Wayland compositors.
       spawn-at-startup "waybar"
-      spawn-at-startup "oguri"
+      // spawn-at-startup "oguri"
 
       // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
       // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -959,24 +951,24 @@
         WantedBy = [ "graphical-session.target" ];
       };
     };
-    oguri = {
-      Unit = {
-        Description = "Oguri Wallpaper Manager";
-        Wants = [ "graphical-session.target" "graphical-session-pre.target" ];
-        After = [ "graphical-session.target" ];
-      };
-      Service = {
-        ExecStart = "${pkgs.oguri}/bin/oguri";
-        Restart = "on-failure";
-        # Environment = [
-          # "XDG_RUNTIME_DIR=%t"
-          # "WAYLAND_DISPLAY=wayland-1"
-        # ];
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
+    # oguri = {
+    #   Unit = {
+    #     Description = "Oguri Wallpaper Manager";
+    #     Wants = [ "graphical-session.target" "graphical-session-pre.target" ];
+    #     After = [ "graphical-session.target" ];
+    #   };
+    #   Service = {
+    #     ExecStart = "${pkgs.oguri}/bin/oguri";
+    #     Restart = "on-failure";
+    #     # Environment = [
+    #       # "XDG_RUNTIME_DIR=%t"
+    #       # "WAYLAND_DISPLAY=wayland-1"
+    #     # ];
+    #   };
+    #   Install = {
+    #     WantedBy = [ "graphical-session.target" ];
+    #   };
+    # };
     cliphist = {
       Unit = {
         Description = "Clipboard history daemon for Wayland";

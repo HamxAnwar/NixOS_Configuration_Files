@@ -115,15 +115,15 @@
     # Enable CUPS to print documents.
     printing.enable = true;
 
-    logind = {
-      extraConfig = ''
-        HandleLidSwitch=suspend
-        HandleLidSwitchExternalPower=ignore
-        IdleAction=ignore
-        HoldoffTimeoutSec=30s
-        InhibitDelayMaxSec=5s
-      '';
-    };
+    # logind = {
+    #   settings.Login = ''
+    #     HandleLidSwitch=suspend
+    #     HandleLidSwitchExternalPower=ignore
+    #     IdleAction=ignore
+    #     HoldoffTimeoutSec=30s
+    #     InhibitDelayMaxSec=5s
+    #   '';
+    # };
   
     # Use power-profiles-daemon for better power management
     power-profiles-daemon.enable = true;
@@ -152,7 +152,7 @@
       enable = true;
       settings = {
         default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd '${pkgs.niri}/bin/niri'";
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd '${pkgs.niri}/bin/niri'";
           # command = "${pkgs.niri}/bin/niri"; # To directly go to niri without login screen
           user = "r3d";
         };
@@ -274,7 +274,7 @@
     
     autoUpgrade = {
       enable = true;
-      channel = "https://nixos.org/channels/nixos-25.05";
+      channel = "https://nixos.org/channels/nixos-25.11";
     };
   };
 }
